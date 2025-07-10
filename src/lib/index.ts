@@ -1,4 +1,6 @@
 // Component exports
+import { default as RaySelector } from './components/RaySelector.svelte';
+import { default as GraphSelector } from './components/GraphSelector.svelte';
 export { default as Magnifier } from './components/Magnifier.svelte';
 export { default as Notepad } from './components/Notepad.svelte';
 

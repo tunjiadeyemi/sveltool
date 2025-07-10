@@ -2,15 +2,47 @@
   import { enableNotepad, notes } from '$lib/stores/notes';
 
   export let handleClose: () => void = () => {};
+
+  let left = 0;
+  let top = 0;
+  let isDragging = false;
+  let startX: number, startY: number;
+  let initialLeft: number, initialTop: number;
+
+  function handleMouseDown(event: MouseEvent) {
+    isDragging = true;
+    startX = event.clientX;
+    startY = event.clientY;
+    initialLeft = left;
+    initialTop = top;
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+  }
+
+  function handleMouseMove(event: MouseEvent) {
+    if (!isDragging) return;
+    left = initialLeft + (event.clientX - startX);
+    top = initialTop + (event.clientY - startY);
+  }
+
+  function handleMouseUp() {
+    isDragging = false;
+    document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener('mouseup', handleMouseUp);
+  }
 </script>
 
 {#if $enableNotepad}
   <section
-    class="absolute left-[35%] top-[15%] z-[1000] mx-auto flex h-[40vh] w-[32vw] flex-col rounded-md border bg-white shadow-md"
+    class="absolute z-[1000] mx-auto flex h-[40vh] w-[32vw] flex-col rounded-md bg-white shadow-md"
+    style="left: {left}px; top: {top}px;"
   >
-    <div class="flex items-center justify-between border-b bg-[#f2f2f2] p-2.5">
+    <!-- svelte-ignore a11y_no_static_element_interactions -->
+    <div
+      class="flex items-center justify-between border-b bg-[#f2f2f2] p-2.5 cursor-move"
+      on:mousedown={handleMouseDown}
+    >
       <p class="font-medium text-gray-600">Global Notepad</p>
-
       <button type="button" on:click={handleClose} class="text-2xl">&times;</button>
     </div>
 
