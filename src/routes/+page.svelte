@@ -1,23 +1,15 @@
 <script>
-  import { enableNotepad } from '$lib/stores/notes';
   import LineReader from '$lib/components/LineReader.svelte';
   import Magnifier from '$lib/components/Magnifier.svelte';
   import Notepad from '$lib/components/Notepad.svelte';
-  import { enableMagnifier } from '$lib/stores/magnifier';
-  import { onMount } from 'svelte';
-
-  onMount(() => {
-    enableMagnifier.set(true);
-    enableNotepad.set(true);
-  });
 </script>
 
 <section class="relative h-screen w-full overflow-hidden">
-  <Notepad />
+  <Notepad open={true} />
 
   <LineReader backgroundColor="blue" />
 
-  <Magnifier borderRadius={100}>
+  <Magnifier open={true} borderRadius={100}>
     <p>
       Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum incidunt reiciendis
       praesentium autem inventore aperiam eveniet, cumque exercitationem veniam sint dolorum animi

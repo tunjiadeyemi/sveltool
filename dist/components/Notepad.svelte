@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { notes } from '$lib/stores/notes';
+  import { notes } from '../stores/notes';
 
   export let open: boolean = false;
   export let handleClose: () => void = () => {};
