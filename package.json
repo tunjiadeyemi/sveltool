@@ -6,22 +6,26 @@
     "dev": "vite dev",
     "build": "npm run package && npm run package",
     "preview": "vite preview",
-    "package": "svelte-kit sync && svelte-package && publint",
+    "build:css": "tailwindcss -i ./src/lib/styles-source.css -o ./src/lib/styles.css",
+    "build:css:watch": "tailwindcss -i ./src/lib/styles-source.css -o ./src/lib/styles.css --watch",
+    "package": "npm run build:css && svelte-kit sync && svelte-package && publint",
     "prepublishOnly": "npm run package",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
-  },
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "svelte": "./dist/index.js"
-    }
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "dev:full": "concurrently \"npm run build:css:watch\" \"npm run dev\""
   },
   "files": [
     "dist",
     "!dist/**/*.test.*",
     "!dist/**/*.spec.*"
   ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "svelte": "./dist/index.js"
+    },
+    "./styles": "./dist/styles.css"
+  },
   "peerDependencies": {
     "svelte": "^5.0.0"
   },
@@ -29,6 +33,7 @@
     "@sveltejs/adapter-auto": "^6.0.0",
     "@sveltejs/kit": "^2.16.0",
     "@sveltejs/vite-plugin-svelte": "^5.0.0",
+    "concurrently": "^9.2.0",
     "svelte": "^5.0.0",
     "svelte-check": "^4.0.0",
     "typescript": "^5.0.0",

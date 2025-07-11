@@ -4,6 +4,9 @@ import GraphSelector from '$lib/components/GraphSelector.svelte';
 import Magnifier from '$lib/components/Magnifier.svelte';
 import Notepad from '$lib/components/Notepad.svelte';
 
+// Style exports
+import './styles.css';
+
 // Utility exports
 export * from './utils/formatters';
 export * from './utils/validators';

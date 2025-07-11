@@ -3,6 +3,8 @@ import RaySelector from './components/RaySelector.svelte';
 import GraphSelector from './components/GraphSelector.svelte';
 import Magnifier from './components/Magnifier.svelte';
 import Notepad from './components/Notepad.svelte';
+// Style exports
+import './styles.css';
 // Utility exports
 export * from './utils/formatters';
 export * from './utils/validators';
