@@ -12,7 +12,10 @@
     "prepublishOnly": "npm run package",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "dev:full": "concurrently \"npm run build:css:watch\" \"npm run dev\""
+    "dev:full": "concurrently \"npm run build:css:watch\" \"npm run dev\"",
+    "release:patch": "npm version patch && npm publish --access public",
+    "release:minor": "npm version minor && npm publish --access public",
+    "release:major": "npm version major && npm publish --access public"
   },
   "files": [
     "dist",
